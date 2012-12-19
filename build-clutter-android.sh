@@ -16,8 +16,6 @@
 
 set -ex
 
-source ./android-env.sh
-
 # download Android NDK and create standalone toolchain
 if ! test -d android-ndk-r8c; then
   wget http://dl.google.com/android/ndk/android-ndk-r8c-linux-x86.tar.bz2
@@ -28,23 +26,25 @@ if ! test -d android-ndk-r8c; then
   popd
 fi
 
-PREFIX=$PWD/jhbuild/.local
+JHB_PREFIX=$PWD/jhbuild/.local
 
 # set up patched version of jhbuild
 if ! test -d jhbuild; then
   git clone git://git.gnome.org/jhbuild
   pushd jhbuild
   patch -p1 -i ../modulesets/patches/jhbuild/disable-clean-la-files.patch
-  ./autogen.sh --prefix=$PREFIX
+  ./autogen.sh --prefix=$JHB_PREFIX
   make install
   popd
 fi
 
-mkdir -p $PREFIX/share/aclocal
-cp /usr/share/aclocal/gtk-doc.m4 $PREFIX/share/aclocal/
+mkdir -p $JHB_PREFIX/share/aclocal
+cp /usr/share/aclocal/gtk-doc.m4 $JHB_PREFIX/share/aclocal/
+
+source ./android-env.sh
 
 # start the build
-$PREFIX/bin/jhbuild -f jhbuildrc-android build -q mx libsoup
+$JHB_PREFIX/bin/jhbuild -f jhbuildrc-android build -q mx libsoup
 
 # download Android SDK
 if ! test -d android-sdk-linux; then
