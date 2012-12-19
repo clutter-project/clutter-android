@@ -1,0 +1,13 @@
+bin
+libs
+obj
+
+default.properties
+local.properties
+proguard.cfg
+
+*.sw?
+
+build.xml
+proguard-project.txt
+project.properties

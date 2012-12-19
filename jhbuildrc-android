@@ -1,0 +1,21 @@
+moduleset = os.environ['PWD'] + '/modulesets/clutter-android.modules'
+checkoutroot = os.environ['PWD'] + '/sources'
+prefix = os.environ['PWD'] + '/install'
+
+build_policy = 'updated'
+use_lib64 = False
+
+use_local_modulesets = True
+partial_build = False
+autogenargs = '--disable-shared --disable-gtk-doc --host=arm-linux-androideabi gl_cv_header_working_stdint_h=yes --disable-introspection '
+makeargs = '-j 4'
+
+
+os.environ['ac_cv_path_GLIB_COMPILE_RESOURCES']='/usr/bin/glib-compile-resources'
+os.environ['ac_cv_path_GLIB_COMPILE_SCHEMAS']='/usr/bin/glib-compile-schemas'
+os.environ['ac_cv_path_GLIB_GENMARSHAL']='/usr/bin/glib-genmarshal'
+
+os.environ['PATH'] += ':' + os.environ['PWD'] + '/toolchain/bin'
+os.environ['CC'] = 'arm-linux-androideabi-gcc'
+
+os.environ['PKG_CONFIG'] = 'pkg-config --define-variable=glib_genmarshal=/usr/bin/glib-genmarshal --define-variable=gobject_query=/usr/bin/gobject-query --define-variable=glib_mkenums=/usr/bin/glib-mkenums --define-variable=glib_compile_resources=/usr/bin/glib-compile-resources'

@@ -1,0 +1,25 @@
+====== Intro ======
+
+Android-Clutter is a set of scripts helping you to build Clutter based
+applications for Android. This project mostly relies on jhbuild to
+compile all the libraries with the right options.
+
+====== First setup ======
+
+To build Clutter and all its dependencies run :
+
+$ ./build-clutter-android.sh
+
+This script will take care of downloading the Android SDK/NDK for you.
+
+====== Setup and Compile the demo app ======
+
+Once the stack is compiled you can setup and install the demo app by
+running :
+
+$ make ohand-app-full
+
+After you setup the app, any modification to the app can be compiled
+and installed by running :
+
+$ make ohand-app

@@ -1,0 +1,168 @@
+<?xml version="1.0" ?>
+<moduleset>
+  <repository href="http://download.gnome.org/sources/" name="gnome.org" type="tarball"/>
+  <repository href="http://downloads.sourceforge.net/" name="sourceforge.net" type="tarball"/>
+  <repository href="http://cairographics.org/" name="cairo.org" type="tarball"/>
+  <repository href="http://www.fontconfig.org/" name="fontconfig.org" type="tarball"/>
+  <repository href="http://ftp.gnu.org/pub/gnu/" name="gnu.org" type="tarball"/>
+  <repository href="http://zlib.net/" name="zlib.net" type="tarball" />
+  <repository type="tarball" name="savannah.gnu.org" href="http://download.savannah.gnu.org/releases/"/>
+  <repository type="tarball" name="ijg.org" href="http://www.ijg.org/files/" />
+  <repository type="tarball" name="xmlsoft.org" href="ftp://xmlsoft.org/"/>
+  <repository type="git" name="github.com" href="git://github.com/"/>
+  <repository type="git" name="git.gnome.org" href="git://git.gnome.org/"/>
+
+  <autotools id="iconv" autogen-sh="configure">
+    <branch version="1.14" repo="gnu.org" module="libiconv/libiconv-1.14.tar.gz">
+      <patch file="libiconv/update-config.patch" strip="1" />
+    </branch>
+  </autotools>
+
+  <tarball id="libffi" version="3.0.11">
+    <source href="ftp://sourceware.org/pub/libffi/libffi-3.0.11.tar.gz" />
+  </tarball>
+
+  <autotools id="zlib" version="1.2.7" autogen-template="%(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s --static" makeargs="CC='arm-linux-androideabi-gcc' LD='arm-linux-androideabi-ld'">
+    <branch repo="zlib.net" module="zlib-1.2.7.tar.gz" version="1.2.7" />
+  </autotools>
+
+  <autotools id="gettext" autogenargs="--without-included-regex --disable-java --disable-openmp  --without-libiconv-prefix --without-libintl-prefix --without-libglib-2.0-prefix --without-libcroco-0.6-prefix --with-included-libxml --without-libncurses-prefix --without-libtermcap-prefix --without-libcurses-prefix --without-libexpat-prefix --without-emacs" autogen-sh="autoreconf">
+    <branch module="gettext/gettext-0.18.1.1.tar.gz" repo="gnu.org" source-subdir="gettext-tools" version="0.18.1.1" subdir="intl">
+      <patch file="gettext/disable-everything-except-intl.patch" strip="1" />
+    </branch>
+  </autotools>
+
+  <autotools id="libpng" autogen-sh="configure">
+    <branch module="libpng/libpng-1.5.10.tar.xz" repo="sourceforge.net" version="1.5.10" />
+  </autotools>
+
+  <autotools id="libjpeg">
+    <branch module="jpegsrc.v8d.tar.gz" repo="ijg.org" checkoutdir="jpeg-8d" version="8d"/>
+  </autotools>
+
+  <autotools id="libxml2" autogenargs="--without-python --without-debug --without-legacy --without-catalog --without-docbook --with-c14n --with-gnu-ld --disable-tests" autogen-sh="autoreconf">
+    <branch module="libxml2/libxml2-2.9.0.tar.gz"
+            repo="xmlsoft.org"
+            version="2.9.0">
+      <patch file="libxml2/0001-add-option-to-disable-tests-build.patch" strip="1"/>
+    </branch>
+  </autotools>
+
+  <autotools id="cairo" autogenargs="--cache-file=config.cache --enable-test-surfaces --disable-xlib">
+    <branch module="releases/cairo-1.12.2.tar.xz" repo="cairo.org" version="1.12.2">
+      <patch file="cairo/0001-don-t-use-lconv.patch" strip="1" />
+    </branch>
+    <dependencies>
+      <dep package="fontconfig"/>
+      <dep package="pixman"/>
+      <dep package="libpng"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="pango" autogenargs="--with-included-modules=yes --with-dynamic-modules=no --without-x">
+    <branch hash="sha256:7c6d2ab024affaed0e942f9279b818235f9c6a36d9fc50688f48d387f4102dff" module="pango/1.30/pango-1.30.0.tar.xz" repo="gnome.org" size="1158224" version="1.30.0"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="freetype"/>
+      <dep package="cairo"/>
+    </dependencies>
+  </autotools>
+
+  <autotools autogenargs="--disable-gtk --disable-arm-neon --disable-arm-simd --disable-gcc-inline-asm CFLAGS='-DSIZE_MAX=4294967295U -U__ANDROID__ -UANDROID -U__linux__'" id="pixman" >
+    <branch module="releases/pixman-0.26.0.tar.gz" repo="cairo.org" version="0.26.0"/>
+  </autotools>
+
+  <autotools id="fontconfig" autogenargs="--with-default-fonts=/system/fonts --disable-docs --enable-libxml2">
+    <branch hash="sha256:a1b824c1443868505b99872ae6759a5400554612fdac14a6481dba82284e98a3" module="release/fontconfig-2.9.92.tar.gz" repo="fontconfig.org" size="1698561" version="2.9.92">
+      <patch file="fontconfig/0001-don-t-use-lconv.patch" strip="1" />
+    </branch>
+    <dependencies>
+      <dep package="libxml2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gdk-pixbuf" autogenargs="--disable-glibtest --disable-modules --without-libtiff --without-gdiplus --with-included-loaders=png,jpeg --disable-gio-sniffing" autogen-sh="autoreconf">
+    <branch hash="sha256:a22373a72621c6f73e8c216410aeb46e3bb05b477e600b6ac481a47ecd4c09cc" module="gdk-pixbuf/2.26/gdk-pixbuf-2.26.3.tar.xz" repo="gnome.org" size="1175376" version="2.26.3"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="libpng"/>
+      <dep package="libjpeg"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="glib" autogenargs="glib_cv_stack_grows=no glib_cv_uscore=no ac_cv_func_posix_getpwuid_r=no ac_cv_func_posix_getgrgid_r=no --with-libiconv=gnu --disable-modular-tests">
+    <branch module="djdeath/glib" repo="github.com" revision="android"/>
+    <dependencies>
+      <dep package="gettext"/>
+      <dep package="libffi"/>
+      <dep package="iconv"/>
+      <dep package="zlib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="atk">
+    <branch module="atk/2.5/atk-2.5.4.tar.xz" repo="gnome.org" version="2.5.4"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="cogl" autogenargs="--disable-gles1 --enable-gles2 --enable-android-egl-platform=yes --disable-gl --disable-gdk-pixbuf">
+    <branch module="djdeath/cogl-android" repo="github.com" revision="android"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="pango"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="freetype" autogen-sh="configure" autogenargs="CFLAGS=-std=gnu99">
+    <branch module="freetype/freetype-2.4.6.tar.bz2" version="2.4.6"
+            repo="savannah.gnu.org">
+    </branch>
+  </autotools>
+
+  <autotools id="glib-android">
+    <branch repo="github.com" module="dlespiau/glib-android.git" checkoutdir="glib-android"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="clutter" autogenargs="--enable-android-backend --disable-conformance --disable-examples --disable-tests --disable-glibtest">
+    <branch module="djdeath/clutter-android" repo="github.com" revision="android"/>
+    <dependencies>
+      <dep package="cogl"/>
+      <dep package="atk"/>
+      <dep package="glib"/>
+      <dep package="cairo"/>
+      <dep package="pango"/>
+      <dep package="json-glib"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="glib-android"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="mx" autogenargs="--with-winsys=none --disable-tests --disable-tools --disable-default-style">
+    <branch module="clutter-project/mx" repo="github.com" revision="master"/>
+    <dependencies>
+      <dep package="clutter"/>
+      <dep package="gdk-pixbuf"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libsoup" autogenargs="--disable-tls-check --without-gnome">
+    <branch module="djdeath/libsoup" repo="github.com" version="master"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="libxml2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="json-glib" autogenargs="--disable-glibtest">
+    <branch module="json-glib" repo="git.gnome.org" revision="0.15.2"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+</moduleset>

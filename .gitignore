@@ -1,0 +1,8 @@
+android-ndk-*
+android-sdk-linux
+install
+sources
+toolchain
+jhbuild
+.local
+fake-android-application/fake-android-application.o

@@ -1,0 +1,29 @@
+From 9fef1da277d283fd39df004e8bd575c45daf8eaf Mon Sep 17 00:00:00 2001
+From: Lionel Landwerlin <llandwerlin@gmail.com>
+Date: Wed, 23 May 2012 17:39:56 +0100
+Subject: [PATCH] don't use lconv
+
+---
+ src/cairo-output-stream.c |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/cairo-output-stream.c b/src/cairo-output-stream.c
+index 0adda36..8cc3692 100644
+--- a/src/cairo-output-stream.c
++++ b/src/cairo-output-stream.c
+@@ -312,8 +312,12 @@ _cairo_dtostr (char *buffer, size_t size, double d, cairo_bool_t limited_precisi
+     if (d == 0.0)
+ 	d = 0.0;
+ 
++#ifndef __ANDROID__
+     locale_data = localeconv ();
+     decimal_point = locale_data->decimal_point;
++#else
++    decimal_point = ".";
++#endif
+     decimal_point_len = strlen (decimal_point);
+ 
+     assert (decimal_point_len != 0);
+-- 
+1.7.10
+

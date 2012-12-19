@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<moduleset>
+  <repository href="http://download.gnome.org/sources/" name="gnome.org" type="tarball"/>
+  <repository type="git" name="github.com" href="git://github.com/"/>
+  <repository type="git" name="git.gnome.org" href="git://git.gnome.org/"/>
+
+  <autotools id="glib">
+    <branch module="djdeath/glib" repo="github.com" revision="android"/>
+  </autotools>
+
+  <autotools id="atk">
+    <branch module="atk/2.5/atk-2.5.4.tar.xz" repo="gnome.org" version="2.5.4"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="cogl" autogenargs="--disable-conformance --disable-examples --disable-tests --disable-glibtest">
+    <branch module="cogl" repo="git.gnome.org" revision="cogl-1.12" />
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="clutter" autogenargs="--disable-conformance --disable-examples --disable-tests --disable-glibtest --disable-introspection">
+    <branch module="djdeath/clutter-android" repo="github.com" revision="android" />
+    <dependencies>
+      <dep package="atk"/>
+      <dep package="glib"/>
+      <dep package="cogl"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="mx" autogenargs="--with-winsys=none --disable-tests --disable-tools --disable-default-style">
+    <branch module="clutter-project/mx" repo="github.com" revision="master"/>
+    <dependencies>
+      <dep package="clutter"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libsoup" autogenargs="--disable-tls-check --without-gnome">
+    <branch module="djdeath/libsoup" repo="github.com" version="master"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+</moduleset>

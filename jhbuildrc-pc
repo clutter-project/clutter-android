@@ -1,0 +1,17 @@
+moduleset = os.path.dirname(os.path.abspath(__file__)) + '/modulesets/clutter-pc.modules'
+checkoutroot = os.path.dirname(os.path.abspath(__file__)) + '/pc/sources'
+prefix = os.path.dirname(os.path.abspath(__file__)) + '/pc/install'
+
+build_policy = 'updated'
+use_lib64 = False
+
+use_local_modulesets = True
+partial_build = False
+autogenargs = '--disable-static --disable-gtk-doc '
+
+# Use system libraries for the builds
+addpath('PKG_CONFIG_PATH', os.path.join(os.sep, 'usr', 'lib', 'pkgconfig'))
+addpath('PKG_CONFIG_PATH', os.path.join(os.sep, 'usr', 'lib64', 'pkgconfig'))
+addpath('PKG_CONFIG_PATH', os.path.join(os.sep, 'usr', 'share', 'pkgconfig'))
+
+addpath('XDG_DATA_DIRS', os.path.join(os.sep, 'usr', 'share'))
