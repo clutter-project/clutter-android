@@ -17,6 +17,7 @@ This script will take care of downloading the Android SDK/NDK for you.
 Once the stack is compiled you can setup and install the demo app by
 running :
 
+$ source android-env.sh
 $ make ohand-app-full
 
 After you setup the app, any modification to the app can be compiled
