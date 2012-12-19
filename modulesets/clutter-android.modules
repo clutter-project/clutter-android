@@ -150,7 +150,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libsoup" autogenargs="--disable-tls-check --without-gnome">
+  <autotools id="libsoup" autogenargs="--disable-tls-check --without-gnome --without-apache-httpd">
     <branch module="djdeath/libsoup" repo="github.com" version="master"/>
     <dependencies>
       <dep package="glib"/>
