@@ -32,4 +32,4 @@ OHAND_SOURCES = $(addprefix $(PWD)/ohand/jni/, $(OHAND_FILES))
 
 ohand-pc: $(OHAND_SOURCES) $(FAKE_C) $(FAKE_H)
 	@echo $(OHAND_SOURCES)
-	$(CC) -Wall -g -D_PC_VERSION=1 -include $(FAKE_H) $(FAKE_FLAGS) $(OHAND_SOURCES) $(FAKE_C) -I$(PWD)/ohand/jni -o ohand-pc $(FAKE_LIBS)
+	$(CC) -Wall -g -D_PC_VERSION=1 -include $(FAKE_H) $(FAKE_CFLAGS) $(OHAND_SOURCES) $(FAKE_C) -I$(PWD)/ohand/jni -o ohand-pc $(FAKE_LIBS)
