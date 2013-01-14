@@ -27,8 +27,9 @@
   </autotools>
 
   <autotools id="gettext" autogenargs="--without-included-regex --disable-java --disable-openmp  --without-libiconv-prefix --without-libintl-prefix --without-libglib-2.0-prefix --without-libcroco-0.6-prefix --with-included-libxml --without-libncurses-prefix --without-libtermcap-prefix --without-libcurses-prefix --without-libexpat-prefix --without-emacs" autogen-sh="autoreconf">
-    <branch module="gettext/gettext-0.18.1.1.tar.gz" repo="gnu.org" source-subdir="gettext-tools" version="0.18.1.1" subdir="intl">
+    <branch module="gettext/gettext-0.18.2.tar.gz" repo="gnu.org" source-subdir="gettext-tools" version="0.18.2" subdir="intl">
       <patch file="gettext/disable-everything-except-intl.patch" strip="1" />
+      <patch file="gettext/0001-intl-dont-hard-code-shell.patch" strip="1" />
     </branch>
   </autotools>
 
