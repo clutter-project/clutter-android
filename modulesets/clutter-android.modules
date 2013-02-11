@@ -97,7 +97,6 @@
       <dep package="gettext"/>
       <dep package="libffi"/>
       <dep package="iconv"/>
-      <dep package="zlib"/>
     </dependencies>
   </autotools>
 

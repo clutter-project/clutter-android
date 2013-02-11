@@ -30,8 +30,8 @@ export CXX=arm-linux-androideabi-g++
 export C_INCLUDE_PATH=$PREFIX/include
 export CPLUS_INCLUDE_PATH=$PREFIX/include
 
-export ANDROID_SDK_DIR="$PWD/android-sdk-linux"
-export ANDROID_NDK_DIR=`find $PWD/* -maxdepth 0 -type d -name 'android-ndk-r*'`
+export ANDROID_SDK_DIR="$HOME/android-sdk-linux"
+export ANDROID_NDK_DIR=`find $HOME -maxdepth 1 -type d -name 'android-ndk-*'`
 export ANDROID_NDK_TOOLCHAIN="$PWD/toolchain"
 
 export gl_cv_header_working_stdint_h=yes
