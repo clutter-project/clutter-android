@@ -1,0 +1,23 @@
+From: Roberto Huelga <rhuelga@gmail.com>
+Date: 29 Aug 2013 12:05:06 +0100
+Subject: [PATCH] trace don't use lconv
+---
+
+diff --git a/util/cairo-trace/trace.c b/util/cairo-trace/trace.c
+index da7d2f0..ae82bac 100644
+--- a/util/cairo-trace/trace.c
++++ b/util/cairo-trace/trace.c
+@@ -532,8 +532,12 @@ _trace_dtostr (char *buffer, size_t size, double d)
+     if (d == 0.0)
+        d = 0.0;
+
++#ifndef __ANDROID__
+     locale_data = localeconv ();
+     decimal_point = locale_data->decimal_point;
++#else
++    decimal_point = ".";
++#endif
+     decimal_point_len = strlen (decimal_point);
+
+     /* Using "%f" to print numbers less than 0.1 will result in
+--

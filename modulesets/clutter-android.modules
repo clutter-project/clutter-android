@@ -52,6 +52,7 @@
   <autotools id="cairo" autogenargs="--cache-file=config.cache --enable-test-surfaces --disable-xlib">
     <branch module="releases/cairo-1.12.2.tar.xz" repo="cairo.org" version="1.12.2">
       <patch file="cairo/0001-don-t-use-lconv.patch" strip="1" />
+      <patch file="cairo/0002-trace-don-t-use-lconv.patch" strip="1" />
     </branch>
     <dependencies>
       <dep package="fontconfig"/>
