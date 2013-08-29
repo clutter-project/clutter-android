@@ -18,4 +18,4 @@ os.environ['ac_cv_path_GLIB_GENMARSHAL']='/usr/bin/glib-genmarshal'
 os.environ['PATH'] += ':' + os.environ['PWD'] + '/toolchain/bin'
 os.environ['CC'] = 'arm-linux-androideabi-gcc'
 
-os.environ['PKG_CONFIG'] = 'pkg-config --define-variable=glib_genmarshal=/usr/bin/glib-genmarshal --define-variable=gobject_query=/usr/bin/gobject-query --define-variable=glib_mkenums=/usr/bin/glib-mkenums --define-variable=glib_compile_resources=/usr/bin/glib-compile-resources'
+os.environ['PKG_CONFIG'] = 'pkg-config --define-variable=glib_genmarshal={glibbin}/glib-genmarshal --define-variable=gobject_query={glibbin}/gobject-query --define-variable=glib_mkenums={glibbin}/glib-mkenums --define-variable=glib_compile_resources={glibbin}/glib-compile-resources'.format(**{ 'glibbin' : os.environ['GLIB_BIN']})

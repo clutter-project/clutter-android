@@ -55,4 +55,11 @@ pathadd "$ANDROID_SDK_DIR/platform-tools"
 
 export NDK_MODULE_PATH=$PWD
 
-export PKG_CONFIG="pkg-config --define-variable=glib_genmarshal=/usr/bin/glib-genmarshal --define-variable=gobject_query=/usr/bin/gobject-query --define-variable=glib_mkenums=/usr/bin/glib-mkenums --define-variable=glib_compile_resources=/usr/bin/glib-compile-resources"
+export GLIB_BIN=/usr/bin
+
+if [[ `uname` == 'Darwin' ]] && [[ -f '/opt/local/bin/glib-mkenums' ]]
+then
+    GLIB_BIN='/opt/local/bin'
+fi
+
+export PKG_CONFIG="pkg-config --define-variable=glib_genmarshal=$GLIB_BIN/glib-genmarshal --define-variable=gobject_query=$GLIB_BIN/gobject-query --define-variable=glib_mkenums=$GLIB_BIN/glib-mkenums --define-variable=glib_compile_resources=$GLIB_BIN/glib-compile-resources"
