@@ -22,8 +22,8 @@
     <source href="ftp://sourceware.org/pub/libffi/libffi-3.0.11.tar.gz" />
   </tarball>
 
-  <autotools id="zlib" version="1.2.7" autogen-template="%(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s --static" makeargs="CC='arm-linux-androideabi-gcc' LD='arm-linux-androideabi-ld'">
-    <branch repo="zlib.net" module="zlib-1.2.7.tar.gz" version="1.2.7" />
+  <autotools id="zlib" version="1.2.8" autogen-template="%(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s --static" makeargs="CC='arm-linux-androideabi-gcc' LD='arm-linux-androideabi-ld'">
+    <branch repo="zlib.net" module="zlib-1.2.8.tar.gz" version="1.2.8" />
   </autotools>
 
   <autotools id="gettext" autogenargs="--without-included-regex --disable-java --disable-openmp  --without-libiconv-prefix --without-libintl-prefix --without-libglib-2.0-prefix --without-libcroco-0.6-prefix --with-included-libxml --without-libncurses-prefix --without-libtermcap-prefix --without-libcurses-prefix --without-libexpat-prefix --without-emacs" autogen-sh="autoreconf">
