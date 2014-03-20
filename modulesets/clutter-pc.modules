@@ -39,7 +39,7 @@
   </autotools>
 
   <autotools id="libsoup" autogenargs="--disable-tls-check --without-gnome">
-    <branch module="djdeath/libsoup" repo="github.com" version="master"/>
+    <branch module="djdeath/libsoup" repo="github.com" version="old-websocket-work"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
