@@ -153,7 +153,7 @@
   </autotools>
 
   <autotools id="libsoup" autogenargs="--disable-tls-check --without-gnome --without-apache-httpd">
-    <branch module="djdeath/libsoup" repo="github.com" version="master"/>
+    <branch module="djdeath/libsoup" repo="github.com" version="old-websocket-work"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="libxml2"/>
